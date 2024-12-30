@@ -55,7 +55,8 @@ module Milvus
     def create(
       collection_name:,
       auto_id:,
-      fields:
+      fields:,
+      functions:
     )
       response = client.connection.post("#{PATH}/create") do |req|
         req.body = {
@@ -63,6 +64,7 @@ module Milvus
           schema: {
             autoId: auto_id,
             fields: fields,
+            functions: functions,
             name: collection_name # This duplicated field is kept for historical reasons.
           }
         }
