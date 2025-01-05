@@ -6,6 +6,7 @@ require_relative "milvus/constants"
 module Milvus
   autoload :Base, "milvus/base"
   autoload :Collections, "milvus/collections"
+  autoload :Databases, "milvus/databases"
   autoload :Client, "milvus/client"
   autoload :Error, "milvus/error"
   autoload :Entities, "milvus/entities"
