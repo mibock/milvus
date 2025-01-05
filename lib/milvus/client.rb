@@ -26,6 +26,10 @@ module Milvus
       @schema ||= Milvus::Collections.new(client: self)
     end
 
+    def databases
+      @databases ||= Milvus::Databases.new(client: self)
+    end
+
     def partitions
       @partitions ||= Milvus::Partitions.new(client: self)
     end
