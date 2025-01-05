@@ -8,10 +8,11 @@ module Milvus
     #
     # @param collection_name [String] The name of the collection to check.
     # @return [Hash] Server response
-    def has(collection_name:)
+    def has(collection_name:, db_name: )
       response = client.connection.post("#{PATH}/has") do |req|
         req.body = {
-          collectionName: collection_name
+          collectionName: collection_name,
+          dbName: db_name
         }
       end
       response.body
