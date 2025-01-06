@@ -9,7 +9,7 @@ module Milvus
     # @param db_name [String] The name of the database to alter.
     # @param properties [String] The new properties of the database.
     # @return [Hash] Server response
-    def alter(db_name:)
+    def alter(db_name:, properties:)
       response = client.connection.post("#{PATH}/alter") do |req|
         req.body = {
           dbName: db_name,
@@ -24,12 +24,12 @@ module Milvus
     # @param db_name [String] The name of the database to be created.
     # @param properties [String] The properties of the new database.
     # @return [Hash] Server response
-    def create(db_name:, properties:)
+    def create(db_name:, properties: nil)
       response = client.connection.post("#{PATH}/create") do |req|
         req.body = {
-          dbName: db_name,
-          properties:
+          dbName: db_name
         }
+        req.body[:properties] = properties if properties
       end
       response.body.empty? ? true : response.body
     end
