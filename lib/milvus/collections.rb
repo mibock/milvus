@@ -67,8 +67,7 @@ module Milvus
       db_name: nil,
       auto_id:,
       fields:,
-      functions: nil,
-      db_name: nil
+      functions: nil
     )
       response = client.connection.post("#{PATH}/create") do |req|
         req.body = {
