@@ -61,13 +61,17 @@ module Milvus
     # @param description [String] A description of the collection.
     # @param fields [Array<Hash>] The fields of the collection.
     # @param functions [Array<Hash>] The functions for the collection (optional).
+    # @param index_params [Array<Hash>] The index params for the collection (optional).
+    # @param params [<Hash>] The extra params for the collection (optional).
     # @return [Hash] Server response
     def create(
       collection_name:,
       db_name: nil,
       auto_id:,
       fields:,
-      functions: nil
+      functions: nil,
+      index_params: nil,
+      params: nil
     )
       response = client.connection.post("#{PATH}/create") do |req|
         req.body = {
@@ -75,12 +79,13 @@ module Milvus
           schema: {
             autoId: auto_id,
             fields: fields,
-#            functions: functions,
             name: collection_name # This duplicated field is kept for historical reasons.
           }
         }
         req.body[:dbName] = db_name if db_name
         req.body[:schema][:functions] = functions if functions
+        req.body[:indexParams] = index_params if index_params
+        req.body[:params] = params if params
       end
       response.body.empty? ? true : response.body
     end
